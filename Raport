@@ -1,0 +1,13 @@
+#Celem projektu była analiza SNP 
+
+
+1. W pierwszej kolejności pobrałem 1 000 000 odczytów z każdej próbki wykorzystując komędę fastq-dump
+2. Kolejnym krokiem była analiza jakościowa podanych odczytów do tego wykorzystano fastqc ponieważ odzczyty jakości były w miarę ok 
+więc usunołem tylko te odczyty które wykraczały poza jakość przy pomocy trimmomatica następie znów przetestowałem jakość i wynkiki przedtawiłem w folderze Data
+Dokonaj kontroli jakości pobranych odczytów, dokonaj filtracji odczytów (jeśli wymagane) i ponownie sprawdź jakość odczytów po filtrowaniu.
+4. Pobierz odpowiedni genom referencyjny wraz z jego annotacją oraz przygotuj go do
+mapowania.
+5. Dokonaj mapowania pobranych odczytów względem genomu referencyjnego. Zwizualizuj wynik mapowania.
+6. Dokonaj detekcji wariantów typu SNP.
+7. Dokonaj annotacji zidentyfikowanych wariantów.
+8. Porównaj wyniki pomiędzy próbkami z wykorzystaniem wizualizacji
