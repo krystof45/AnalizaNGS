@@ -1,10 +1,10 @@
 #Celem projektu była analiza SNP 
 
 
-1. W pierwszej kolejności pobrałem 1 000 000 odczytów z każdej próbki wykorzystując komędę fastq-dump.
-2. Kolejnym krokiem była analiza jakościowa podanych odczytów do tego wykorzystano fastqc ponieważ odzczyty jakości były w miarę ok. 
-Więc usunołem tylko te odczyty które wykraczały poza jakość przy pomocy trimmomatica następie znów przetestowałem jakość i wynkiki przedtawiłem w folderze Data.
-3. Następnie pobrałem genom referencyjny i przygotowłaem bibliotekę do adnotacji dzięki hisat2-buildindex.
-4. Po zmapowaniu do genomu ref dane zamieniłem z plików SAM na pliki BAM przy pomocy narzędzi samtools.
-5. Do dokonania detekcji wariantów urzyłem Bcftools czego wynikiem był plik vcf.
-6. Otrzymane dane moża zwizualizować wykorzeystałem do tego pakiet vcfR i program IGV
+1. First, I took 1,000,000 readings from each sample using the fastq-dump command.
+2. The next step was the qualitative analysis of the given readings, for this we used fastqc because the quality readings were approx.
+So I deleted only those readings that were beyond quality with the trimmomatic, then tested the quality again and showed the results in the Data folder.
+3. Then I downloaded the reference genome and prepared the annotation library with hisat2-buildindex.
+4. After mapping to the ref genome, I changed the data from SAM files to BAM files using samtools tools.
+5. I used Bcftools to detect variants and the result was a vcf file.
+6. The obtained data can be visualized by using the vcfR package and the IGV program
