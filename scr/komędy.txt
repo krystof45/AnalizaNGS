@@ -1,0 +1,27 @@
+fastq-dump -X 1000000 --gzip --split-files SRR064545
+fastq-dump -X 1000000 --gzip --split-files SRR064546
+fastq-dump -X 1000000 --gzip --split-files SRR064547
+
+trimmomatic PE -phred33 SRR064545_1.fastq.gz SRR064545_2.fastq.gz SRR064545_1_p.fastq.gz SRR064545_1_up.fastq.gz SRR064545_2_p.fastq.gz SRR064545_2_up.fastq.gz SLIDINGWINDOW:4:20
+trimmomatic PE -phred33 SRR064546_1.fastq.gz SRR064546_2.fastq.gz SRR064546_1_p.fastq.gz SRR064546_1_up.fastq.gz SRR064546_2_p.fastq.gz SRR064546_2_up.fastq.gz SLIDINGWINDOW:4:20
+trimmomatic PE -phred33 SRR064547_1.fastq.gz SRR064547_2.fastq.gz SRR064547_1_p.fastq.gz SRR064547_1_up.fastq.gz SRR064547_2_p.fastq.gz SRR064547_2_up.fastq.gz SLIDINGWINDOW:4:20
+
+wget https://ftp.ncbi.nlm.nih.gov/genomes/refseq/fungi/Saccharomyces_cerevisiae/reference/GCF_000146045.2_R64/GCF_000146045.2_R64_genomic.fna.gz
+
+hisat2-build GCF_000146045.2_R64_genomic.fna Index/i
+
+hisat2 -x ~/Projekt/Referencja_index/Index/i -1 SRR064545_1_p.fastq.gz -2 SRR064545_2_p.fastq.gz -S SRR064545.sam
+hisat2 -x ~/Projekt/Referencja_index/Index/i -1 SRR064546_1_p.fastq.gz -2 SRR064546_2_p.fastq.gz -S SRR064546.sam
+hisat2 -x ~/Projekt/Referencja_index/Index/i -1 SRR064547_1_p.fastq.gz -2 SRR064547_2_p.fastq.gz -S SRR064547.sam
+
+samtools view -b SRR064545.sam > SRR064545.bam
+samtools view -b SRR064546.sam > SRR064546.bam
+samtools view -b SRR064547.sam > SRR064547.bam
+
+samtools flagstat SRR064545.bam >SRR064545_flag.txt
+samtools flagstat SRR064546.bam >SRR064546_flag.txt
+samtools flagstat SRR064547.bam >SRR064547_flag.txt
+
+bcftools mpileup -Ou --fasta-ref ~/Projekt/Referencja_index/GCF_000146045.2_R64_genomic.fna ~/Projekt/Par/bam/mark_dup_SRR064545_split.bam ~/Projekt/Par/bam/mark_dup_SRR064546_split.bam ~/Projekt/Par/bam/mark_dup_SRR064547_split.bam | bcftools call -vmO z - o all.vcf.gz >all.vcf.gz
+
+
