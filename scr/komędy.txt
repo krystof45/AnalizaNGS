@@ -22,6 +22,14 @@ samtools flagstat SRR064545.bam >SRR064545_flag.txt
 samtools flagstat SRR064546.bam >SRR064546_flag.txt
 samtools flagstat SRR064547.bam >SRR064547_flag.txt
 
+gatk MarkDuplicates -I SRR064545_s.bam -O mark_dup_SRR064545.bam -M mark_dup_SRR064545.txt
+gatk MarkDuplicates -I SRR064546_s.bam -O mark_dup_SRR064546.bam -M mark_dup_SRR064546.txt
+gatk MarkDuplicates -I SRR064547_s.bam -O mark_dup_SRR064547.bam -M mark_dup_SRR064547.txt
+
+gatk SplitNCigarReads -R ~/Projekt/Referencja_index/GCF_000146045.2_R64_genomic.fna -I mark_dup_SRR064545.bam -O mark_dup_SRR064545_split.bam
+gatk SplitNCigarReads -R ~/Projekt/Referencja_index/GCF_000146045.2_R64_genomic.fna -I mark_dup_SRR064546.bam -O mark_dup_SRR064546_split.bam
+gatk SplitNCigarReads -R ~/Projekt/Referencja_index/GCF_000146045.2_R64_genomic.fna -I mark_dup_SRR064547.bam -O mark_dup_SRR064547_split.bam
+  
 bcftools mpileup -Ou --fasta-ref ~/Projekt/Referencja_index/GCF_000146045.2_R64_genomic.fna ~/Projekt/Par/bam/mark_dup_SRR064545_split.bam ~/Projekt/Par/bam/mark_dup_SRR064546_split.bam ~/Projekt/Par/bam/mark_dup_SRR064547_split.bam | bcftools call -vmO z - o all.vcf.gz >all.vcf.gz
 
 
