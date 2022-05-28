@@ -1,8 +1,7 @@
 # AnalizaNGS
 
-Catalog Data zawiera wyniki analizy jakości przed i po trymowaniu danych formatem tych plików jest fastqc.html i fastqc.zip oraz wyniki powstałe po analizie danych.
+Catalog Data extension contains quality analysis results before and after data trimming the format of these files is fastqc.html and fastqc.zip and results from data analysis.
 
+The GCF_000146045.2_R64_genomic file is a reference genome taken from the RefSeq database.
 
-Plik GCF_000146045.2_R64_genomic jest genomem referencyjnym pobranym z bazy RefSeq.
-
-Katalog scr zawiera spis komęd urzytych do analizy danych.
+The scr directory contains a list of comediums used for data analysis.
